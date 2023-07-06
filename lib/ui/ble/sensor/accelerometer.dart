@@ -147,10 +147,10 @@ class _AcceletometerScreenState extends State<AcceletometerScreen> {
                   if (i != 999) valueData += "/";
                 }
 
-                ProfileUser user = await SecureStorage().getUser();
-                print(user.customerId);
+                String? phoneNumber = await SecureStorage().getPhoneNumber();
+
                 CreateAccelerometerModel acc = CreateAccelerometerModel(
-                    value: valueData, customer: user.customerId);
+                    value: valueData, customer: phoneNumber ?? "2");
                 final res = await sensorRepository.createAccelerometer(acc);
                 isCallApi = false;
                 String? isSaveData = await SecureStorage().getIsSaveData();

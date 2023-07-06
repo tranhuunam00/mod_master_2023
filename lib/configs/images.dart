@@ -50,4 +50,5 @@ class AppImages {
   static const chatbotBackground = "assets/images/chatbotBackground.png";
 
   static const chatbotImg = "assets/images/chatbot.jpg";
+  static const afternoonSn = "assets/images/nature_sun_afternoon.jpg";
 }
