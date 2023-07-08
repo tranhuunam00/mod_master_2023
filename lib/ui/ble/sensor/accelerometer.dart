@@ -113,9 +113,6 @@ class _AcceletometerScreenState extends State<AcceletometerScreen> {
               newDataZ.value,
             );
 
-            print("positionCode ");
-            print(positionCode);
-
             if (positionCode == 1) typePosition = "Ngửa";
             if (positionCode == 2) typePosition = "Nghiêng Trái";
             if (positionCode == 3) typePosition = "Nghiêng Phải";
@@ -132,11 +129,11 @@ class _AcceletometerScreenState extends State<AcceletometerScreen> {
               countPosition = 0;
             }
 
-            if (listAccX.length > 1000 && !isCallApi) {
+            if (listAccX.length > 20 && !isCallApi) {
               isCallApi = true;
               Future.sync(() async {
                 String valueData = "";
-                for (int i = 0; i < 1000; i++) {
+                for (int i = 0; i < 20; i++) {
                   valueData += listAccX[i].value.toString();
                   valueData += "%";
                   valueData += listAccY[i].value.toString();
@@ -144,31 +141,38 @@ class _AcceletometerScreenState extends State<AcceletometerScreen> {
                   valueData += listAccZ[i].value.toString();
                   valueData += "@";
                   valueData += listAccX[i].time.toString();
-                  if (i != 999) valueData += "/";
+                  if (i != 19) valueData += "/";
                 }
 
                 String? phoneNumber = await SecureStorage().getPhoneNumber();
 
                 CreateAccelerometerModel acc = CreateAccelerometerModel(
                     value: valueData, customer: phoneNumber ?? "2");
-                final res = await sensorRepository.createAccelerometer(acc);
-                isCallApi = false;
-                String? isSaveData = await SecureStorage().getIsSaveData();
-                print("isSaveData");
+                try {
+                  final res = await sensorRepository.createAccelerometer(acc);
 
-                if (res.statusCode == HttpStatus.created ||
-                    isSaveData == "false") {
-                  List<AccelerometerChartModel> newListAccX = listAccX;
-                  List<AccelerometerChartModel> newListAccY = listAccY;
-                  List<AccelerometerChartModel> newListAccZ = listAccZ;
+                  print("----------đã call API----------------");
+                  // String? isSaveData = await SecureStorage().getIsSaveData();
 
-                  newListAccX.removeRange(0, 1000);
-                  newListAccY.removeRange(0, 1000);
-                  newListAccZ.removeRange(0, 1000);
+                  if (res.statusCode == HttpStatus.created) {
+                    print("----------đã call API---------------SUCCESS-");
 
-                  listAccX = newListAccX;
-                  listAccY = newListAccY;
-                  listAccZ = newListAccZ;
+                    List<AccelerometerChartModel> newListAccX = listAccX;
+                    List<AccelerometerChartModel> newListAccY = listAccY;
+                    List<AccelerometerChartModel> newListAccZ = listAccZ;
+
+                    newListAccX.removeRange(0, 20);
+                    newListAccY.removeRange(0, 20);
+                    newListAccZ.removeRange(0, 20);
+
+                    listAccX = newListAccX;
+                    listAccY = newListAccY;
+                    listAccZ = newListAccZ;
+                    isCallApi = false;
+                  }
+                } catch (e) {
+                  print("----------đã call API---------------ERROR-");
+                  isCallApi = false;
                 }
               });
             }

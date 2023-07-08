@@ -3,7 +3,7 @@ import 'package:mod_master_2023/storage/secure_storge.dart';
 
 @immutable
 class Constants {
-  static const String baseUrl = "http://3.95.239.60:5003/api/";
+  static const String baseUrl = "http://3.85.3.86:9001/api/";
 
   static const String userRoute = "users/";
 
@@ -34,7 +34,6 @@ class Constants {
   //
   static Future<Map<String, String>> requestHeadersToken() async {
     var token = await SecureStorage().getToken();
-    print(token);
 
     Map<String, String> _requestHeaders = {
       'Content-type': 'application/json',

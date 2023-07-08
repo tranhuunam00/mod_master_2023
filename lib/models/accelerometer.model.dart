@@ -25,8 +25,6 @@ class CreateAccelerometerModel {
   final String value;
   final String customer;
   CreateAccelerometerModel({required this.value, required this.customer});
-  Map<String, dynamic> toJson() => {
-        'value': value,
-        'customer': customer,
-      };
+  Map<String, dynamic> toJson() =>
+      {'value': value, 'customer': customer, "nameSensor": "accelerometer"};
 }
