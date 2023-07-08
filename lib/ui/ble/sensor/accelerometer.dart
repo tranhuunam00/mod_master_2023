@@ -129,11 +129,11 @@ class _AcceletometerScreenState extends State<AcceletometerScreen> {
               countPosition = 0;
             }
 
-            if (listAccX.length > 20 && !isCallApi) {
+            if (listAccX.length > 1000 && !isCallApi) {
               isCallApi = true;
               Future.sync(() async {
                 String valueData = "";
-                for (int i = 0; i < 20; i++) {
+                for (int i = 0; i < 1000; i++) {
                   valueData += listAccX[i].value.toString();
                   valueData += "%";
                   valueData += listAccY[i].value.toString();
@@ -141,7 +141,7 @@ class _AcceletometerScreenState extends State<AcceletometerScreen> {
                   valueData += listAccZ[i].value.toString();
                   valueData += "@";
                   valueData += listAccX[i].time.toString();
-                  if (i != 19) valueData += "/";
+                  if (i != 999) valueData += "/";
                 }
 
                 String? phoneNumber = await SecureStorage().getPhoneNumber();
@@ -161,9 +161,9 @@ class _AcceletometerScreenState extends State<AcceletometerScreen> {
                     List<AccelerometerChartModel> newListAccY = listAccY;
                     List<AccelerometerChartModel> newListAccZ = listAccZ;
 
-                    newListAccX.removeRange(0, 20);
-                    newListAccY.removeRange(0, 20);
-                    newListAccZ.removeRange(0, 20);
+                    newListAccX.removeRange(0, 1000);
+                    newListAccY.removeRange(0, 1000);
+                    newListAccZ.removeRange(0, 1000);
 
                     listAccX = newListAccX;
                     listAccY = newListAccY;
