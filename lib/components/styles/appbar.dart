@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 appBarStyle(String title) {
   return AppBar(
-      title: Text(title),
+      title: Text(
+        title,
+        style: TextStyle(color: Colors.black),
+      ),
       backgroundColor: Color.fromARGB(255, 135, 178, 252),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(

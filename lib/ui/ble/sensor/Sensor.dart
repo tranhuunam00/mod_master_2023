@@ -95,8 +95,7 @@ class SensorDashboard extends StatelessWidget {
                     //   accelerometerCharactis!.setNotifyValue(true);
                     // }
                     // isNotify = false;
-                    return AcceletometerScreen(
-                        accelerometerCharactis: accelerometerCharactis!);
+                    return AcceletometerScreen();
                   });
             }));
   }

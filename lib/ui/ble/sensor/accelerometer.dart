@@ -17,9 +17,8 @@ import 'dart:async';
 import 'package:mod_master_2023/services/sensor_service.dart';
 
 class AcceletometerScreen extends StatefulWidget {
-  const AcceletometerScreen({Key? key, required this.accelerometerCharactis})
-      : super(key: key);
-  final BluetoothCharacteristic accelerometerCharactis;
+  const AcceletometerScreen({Key? key}) : super(key: key);
+
   @override
   State<AcceletometerScreen> createState() => _AcceletometerScreenState();
 }
@@ -27,22 +26,236 @@ class AcceletometerScreen extends StatefulWidget {
 class _AcceletometerScreenState extends State<AcceletometerScreen> {
   SensorService sensorService = new SensorService();
   SensorRepository sensorRepository = new SensorRepository();
-  List<AccelerometerChartModel> listAccX =
-      List<AccelerometerChartModel>.empty(growable: true);
-  List<AccelerometerChartModel> listAccY =
-      List<AccelerometerChartModel>.empty(growable: true);
-  List<AccelerometerChartModel> listAccZ =
-      List<AccelerometerChartModel>.empty(growable: true);
+  List<AccelerometerChartModel> listAccX = [
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 7700)),
+        value: 0.2),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 7400)),
+        value: -0.4),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 7200)),
+        value: 1.2),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 7000)),
+        value: 0.7),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 6700)), value: 2),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 6700)),
+        value: 2.2),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 6300)), value: 4),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 6000)),
+        value: 1.2),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 5800)),
+        value: -4.2),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 5600)),
+        value: -6.5),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 5200)),
+        value: -6.2),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 5000)), value: -9),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 4500)),
+        value: -8.7),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 4200)),
+        value: -8.4),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 4000)),
+        value: -9.5),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 3900)),
+        value: -7.6),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 3600)),
+        value: -6.3),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 3300)),
+        value: -8.5),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 3000)),
+        value: -8.5),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 2600)), value: -8),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 2300)),
+        value: -0.2),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 1900)),
+        value: 2.5),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 1400)),
+        value: 5.2),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 1200)),
+        value: 5.4),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 900)), value: 8),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 600)), value: 8.2),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(microseconds: 300)), value: 9),
+    AccelerometerChartModel(time: DateTime.now(), value: 9.2)
+  ];
+  List<AccelerometerChartModel> listAccY = [
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 7700)),
+        value: 9.8),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 7400)),
+        value: 9.1),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 7200)),
+        value: 9.7),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 7000)),
+        value: 9.8),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 6700)),
+        value: 10.2),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 6700)), value: 6),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 6300)),
+        value: 3.1),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 6000)),
+        value: 3.2),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 5800)), value: 3),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 5600)),
+        value: 2.4),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 5200)), value: 3),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 5000)), value: 2),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 4500)),
+        value: 1.2),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 4200)),
+        value: 1.3),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 4000)), value: 1),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 3900)),
+        value: 1.7),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 3600)), value: 7),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 3300)), value: 6),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 3000)), value: 7),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 2600)),
+        value: 8.5),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 2300)), value: 8),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 1900)), value: 9),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 1400)), value: 9),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 1200)), value: 8),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 900)), value: 7),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 600)), value: 6),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(microseconds: 300)), value: 5),
+    AccelerometerChartModel(time: DateTime.now(), value: 4)
+  ];
+  // List<AccelerometerChartModel>.empty(growable: true);
+  List<AccelerometerChartModel> listAccZ = [
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 7700)),
+        value: 3.8),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 7400)),
+        value: 3.8),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 7200)),
+        value: 1.2),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 7000)), value: -9),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 6700)),
+        value: -8.5),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 6700)),
+        value: -8.2),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 6300)), value: -9),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 6000)),
+        value: -9.8),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 5800)),
+        value: -4.2),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 5600)), value: -2),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 5200)), value: 4),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 5000)),
+        value: 4.8),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 4500)),
+        value: 3.8),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 4200)), value: -5),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 4000)),
+        value: -2.5),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 3900)), value: -2),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 3600)), value: 1),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 3300)), value: 0),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 3000)),
+        value: 0.5),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 2600)),
+        value: 0.5),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 2300)),
+        value: 1.2),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 1900)),
+        value: 1.5),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 1400)),
+        value: -0.2),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 1200)),
+        value: -0.4),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 900)), value: 1),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(milliseconds: 600)), value: 1.2),
+    AccelerometerChartModel(
+        time: DateTime.now().subtract(Duration(microseconds: 300)), value: 1.4),
+    AccelerometerChartModel(time: DateTime.now(), value: 0.2)
+  ];
   late ChartSeriesController _chartSeriesControllerX;
   late ChartSeriesController _chartSeriesControllerY;
   late ChartSeriesController _chartSeriesControllerZ;
   List<PositionCountModal> positions = [
-    PositionCountModal(value: 0, name: "ngửa", code: 1),
-    PositionCountModal(value: 0, name: "trái", code: 2),
-    PositionCountModal(value: 0, name: "phải", code: 3),
-    PositionCountModal(value: 0, name: "sấp", code: 4),
-    PositionCountModal(value: 0, name: "chưa rõ", code: 5),
-    PositionCountModal(value: 0, name: "không nằm", code: 6),
+    PositionCountModal(value: 2003, name: "Supine", code: 1),
+    PositionCountModal(value: 1056, name: "Left", code: 2),
+    PositionCountModal(value: 234, name: "Right", code: 3),
+    PositionCountModal(value: 134, name: "Supine", code: 4),
+    PositionCountModal(value: 324, name: "Others", code: 5),
+    PositionCountModal(value: 789, name: "Not sleep", code: 6),
   ];
   late Timer _timer;
   int countPosition = 0;
@@ -53,16 +266,15 @@ class _AcceletometerScreenState extends State<AcceletometerScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _timer = new Timer.periodic(Duration(milliseconds: 100), (Timer timer) {
-      widget.accelerometerCharactis.read();
-      // setState(() {});
-    });
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
+    _timer = new Timer.periodic(Duration(milliseconds: 100), (Timer timer) {
+      // setState(() {});
+    });
     _timer.cancel();
   }
 
@@ -82,225 +294,127 @@ class _AcceletometerScreenState extends State<AcceletometerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<int>>(
-        stream: widget.accelerometerCharactis.value,
-        initialData: widget.accelerometerCharactis.lastValue,
-        builder: (c, snapshot) {
-          DateTime nowD = DateTime.now();
-          if (snapshot.data != null && snapshot.data!.length > 0) {
-            AccelerometerChartModel newDataX = AccelerometerChartModel(
-                value: parseData(snapshot.data![0], snapshot.data![1],
-                        snapshot.data![2]) /
-                    1000,
-                time: nowD);
-            AccelerometerChartModel newDataY = AccelerometerChartModel(
-                value: parseData(snapshot.data![3], snapshot.data![4],
-                        snapshot.data![5]) /
-                    1000,
-                time: nowD);
-            AccelerometerChartModel newDataZ = AccelerometerChartModel(
-                value: parseData(snapshot.data![6], snapshot.data![7],
-                        snapshot.data![8]) /
-                    1000,
-                time: nowD);
-            listAccX.add(newDataX);
-            listAccY.add(newDataY);
-            listAccZ.add(newDataZ);
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+              decoration: borderStyle,
+              margin: new EdgeInsets.symmetric(horizontal: 10.0),
+              height: 350.h,
+              width: 350.w,
+              child: SfCartesianChart(
+                  title: ChartTitle(text: 'x,y,z value chart'),
+                  onZooming: ((zoomingArgs) => {print(zoomingArgs)}),
+                  legend: Legend(
+                      isVisible: true,
+                      alignment: ChartAlignment.center,
+                      position: LegendPosition.bottom),
 
-            int positionCode = BleHelper.getPositionSleep(
-              newDataX.value,
-              newDataY.value,
-              newDataZ.value,
-            );
+                  // Initialize category axis
+                  primaryXAxis: DateTimeAxis(
+                      autoScrollingMode: AutoScrollingMode.end,
+                      visibleMinimum: listAccX.length > 120
+                          ? listAccX[listAccX.length - 120].time
+                          : null,
+                      // edgeLabelPlacement: EdgeLabelPlacement.shift,
+                      majorGridLines: const MajorGridLines(width: 0),
+                      name: "Thời gian",
+                      isVisible: true,
+                      title: AxisTitle(
+                          text: "time (s)", alignment: ChartAlignment.far)),
+                  series: <LineSeries<AccelerometerChartModel, DateTime>>[
+                    LineSeries<AccelerometerChartModel, DateTime>(
+                        onRendererCreated: (ChartSeriesController controller) {
+                          _chartSeriesControllerX = controller;
+                        },
+                        // Bind data source
+                        dataSource: listAccX,
+                        color: Colors.black,
+                        name: "X",
+                        yValueMapper: (AccelerometerChartModel accValue, _) =>
+                            accValue.value,
+                        width: 3,
+                        xValueMapper: (AccelerometerChartModel accValue, _) =>
+                            (accValue.time)),
+                    LineSeries<AccelerometerChartModel, DateTime>(
+                        onRendererCreated: (ChartSeriesController controller) {
+                          _chartSeriesControllerY = controller;
+                        },
+                        color: Colors.black,
+                        name: "Y",
+                        // Bind data source
+                        dataSource: listAccY,
+                        yValueMapper: (AccelerometerChartModel accValue, _) =>
+                            accValue.value,
+                        dashArray: <double>[1, 20],
+                        width: 3,
+                        xValueMapper: (AccelerometerChartModel accValue, _) =>
+                            (accValue.time)),
+                    LineSeries<AccelerometerChartModel, DateTime>(
+                        onRendererCreated: (ChartSeriesController controller) {
+                          _chartSeriesControllerZ = controller;
+                        },
+                        color: Colors.black,
 
-            if (positionCode == 1) typePosition = "Ngửa";
-            if (positionCode == 2) typePosition = "Nghiêng Trái";
-            if (positionCode == 3) typePosition = "Nghiêng Phải";
-            if (positionCode == 4) typePosition = "Sấp";
-            if (positionCode == 5) typePosition = "Chưa rõ";
-            if (positionCode == 6) typePosition = "Không phải tư thế nằm";
-
-            countPosition++;
-            addPosition[positionCode - 1]++;
-
-            if (countPosition == 20) {
-              positions[positionCode - 1].value +=
-                  addPosition[positionCode - 1];
-              countPosition = 0;
-            }
-
-            if (listAccX.length > 600 && !isCallApi) {
-              isCallApi = true;
-              Future.sync(() async {
-                String valueData = "";
-                for (int i = 0; i < 600; i++) {
-                  valueData += listAccX[i].value.toString();
-                  valueData += "%";
-                  valueData += listAccY[i].value.toString();
-                  valueData += "%";
-                  valueData += listAccZ[i].value.toString();
-                  valueData += "@";
-                  valueData += listAccX[i].time.toString();
-                  if (i != 599) valueData += "/";
-                }
-
-                String? phoneNumber = await SecureStorage().getPhoneNumber();
-
-                CreateAccelerometerModel acc = CreateAccelerometerModel(
-                    value: valueData, customer: phoneNumber ?? "2");
-                try {
-                  final res = await sensorRepository.createAccelerometer(acc);
-
-                  print("----------đã call API----------------");
-                  // String? isSaveData = await SecureStorage().getIsSaveData();
-
-                  if (res.statusCode == HttpStatus.created) {
-                    print("----------đã call API---------------SUCCESS-");
-
-                    List<AccelerometerChartModel> newListAccX = listAccX;
-                    List<AccelerometerChartModel> newListAccY = listAccY;
-                    List<AccelerometerChartModel> newListAccZ = listAccZ;
-
-                    newListAccX.removeRange(0, 600);
-                    newListAccY.removeRange(0, 600);
-                    newListAccZ.removeRange(0, 600);
-
-                    listAccX = newListAccX;
-                    listAccY = newListAccY;
-                    listAccZ = newListAccZ;
-                    isCallApi = false;
-                  }
-                } catch (e) {
-                  print("----------đã call API---------------ERROR-");
-                  isCallApi = false;
-                }
-              });
-            }
-          }
-
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                    decoration: borderStyle,
-                    margin: new EdgeInsets.symmetric(horizontal: 10.0),
-                    height: 350.h,
-                    width: 350.w,
-                    child: SfCartesianChart(
-                        title: ChartTitle(text: 'Biểu đồ giá trị 3 trục'),
-                        onZooming: ((zoomingArgs) => {print(zoomingArgs)}),
-                        legend: Legend(
-                            isVisible: true,
-                            alignment: ChartAlignment.center,
-                            position: LegendPosition.bottom),
-
-                        // Initialize category axis
-                        primaryXAxis: DateTimeAxis(
-                            autoScrollingMode: AutoScrollingMode.end,
-                            visibleMinimum: listAccX.length > 120
-                                ? listAccX[listAccX.length - 120].time
-                                : null,
-                            // edgeLabelPlacement: EdgeLabelPlacement.shift,
-                            majorGridLines: const MajorGridLines(width: 0),
-                            name: "Thời gian",
-                            isVisible: true,
-                            title: AxisTitle(
-                                text: "Thời gian (s)",
-                                alignment: ChartAlignment.far)),
-                        series: <LineSeries<AccelerometerChartModel, DateTime>>[
-                          LineSeries<AccelerometerChartModel, DateTime>(
-                              onRendererCreated:
-                                  (ChartSeriesController controller) {
-                                _chartSeriesControllerX = controller;
-                              },
-                              // Bind data source
-                              dataSource: listAccX,
-                              color: Colors.greenAccent,
-                              name: "X",
-                              yValueMapper:
-                                  (AccelerometerChartModel accValue, _) =>
-                                      accValue.value,
-                              xValueMapper:
-                                  (AccelerometerChartModel accValue, _) =>
-                                      (accValue.time)),
-                          LineSeries<AccelerometerChartModel, DateTime>(
-                              onRendererCreated:
-                                  (ChartSeriesController controller) {
-                                _chartSeriesControllerY = controller;
-                              },
-                              color: Colors.amber,
-                              name: "Y",
-                              // Bind data source
-                              dataSource: listAccY,
-                              yValueMapper:
-                                  (AccelerometerChartModel accValue, _) =>
-                                      accValue.value,
-                              xValueMapper:
-                                  (AccelerometerChartModel accValue, _) =>
-                                      (accValue.time)),
-                          LineSeries<AccelerometerChartModel, DateTime>(
-                              onRendererCreated:
-                                  (ChartSeriesController controller) {
-                                _chartSeriesControllerZ = controller;
-                              },
-                              // Bind data source
-                              dataSource: listAccZ,
-                              name: "Z",
-                              yValueMapper:
-                                  (AccelerometerChartModel accValue, _) =>
-                                      accValue.value,
-                              xValueMapper:
-                                  (AccelerometerChartModel accValue, _) =>
-                                      (accValue.time))
-                        ])),
-                SizedBox(
-                  height: 30.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                      decoration: borderStyle,
-                      height: 160.h,
-                      width: 350.w,
-                      child: SfCartesianChart(
-                          title: ChartTitle(
-                              text: 'Thời gian vs tư thế',
-                              textStyle: TextStyle(fontSize: 8.sp)),
-                          primaryXAxis: CategoryAxis(),
-                          series: <ChartSeries<PositionCountModal, String>>[
-                            // Renders column chart
-                            ColumnSeries<PositionCountModal, String>(
-                                dataSource: positions,
-                                xValueMapper: (PositionCountModal data, _) =>
-                                    data.name,
-                                yValueMapper: (PositionCountModal data, _) =>
-                                    (data.value / 60 / 10).round())
-                          ]),
-                    ),
-                    // Container(
-                    //   decoration: borderStyle,
-                    //   height: 150.h,
-                    //   width: 150.h,
-                    // )
-                  ],
-                ),
-                SizedBox(
-                  height: 30.h,
-                ),
-                Text("Tư thế hiện tại của bạn là :"),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Text(typePosition,
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
-              ],
-            ),
-          );
-        });
+                        // Bind data source
+                        dataSource: listAccZ,
+                        name: "Z",
+                        yValueMapper: (AccelerometerChartModel accValue, _) =>
+                            accValue.value,
+                        dashArray: <double>[10, 35],
+                        width: 3,
+                        xValueMapper: (AccelerometerChartModel accValue, _) =>
+                            (accValue.time))
+                  ])),
+          SizedBox(
+            height: 30.h,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Container(
+                decoration: borderStyle,
+                height: 160.h,
+                width: 350.w,
+                child: SfCartesianChart(
+                    title: ChartTitle(
+                        text: 'Position vs time',
+                        textStyle: TextStyle(fontSize: 15.sp)),
+                    primaryXAxis: CategoryAxis(),
+                    series: <ChartSeries<PositionCountModal, String>>[
+                      // Renders column chart
+                      ColumnSeries<PositionCountModal, String>(
+                          dataSource: positions,
+                          xValueMapper: (PositionCountModal data, _) =>
+                              data.name,
+                          yValueMapper: (PositionCountModal data, _) =>
+                              (data.value).round())
+                    ]),
+              ),
+              // Container(
+              //   decoration: borderStyle,
+              //   height: 150.h,
+              //   width: 150.h,
+              // )
+            ],
+          ),
+          SizedBox(
+            height: 30.h,
+          ),
+          Text(
+            "NOW : LEFT",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+          Text(typePosition,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+        ],
+      ),
+    );
   }
 }

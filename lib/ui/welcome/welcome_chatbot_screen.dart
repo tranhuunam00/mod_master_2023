@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mod_master_2023/components/background/background.dart';
+import 'package:mod_master_2023/components/styles/appbar.dart';
 import 'package:mod_master_2023/configs/images.dart';
 import 'package:mod_master_2023/storage/secure_storge.dart';
+import 'package:mod_master_2023/ui/ble/sensor/accelerometer.dart';
 import 'package:mod_master_2023/ui/dashboard_customer_screen.dart';
 
 class WelcomeChatbotScreen extends StatefulWidget {
@@ -96,8 +98,11 @@ class WelcomeChatbotScreenState extends State<WelcomeChatbotScreen>
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DashboardCustomerScreen()));
+                                              builder: (context) => Scaffold(
+                                                    appBar: appBarStyle(
+                                                        "ACCELEROMETER"),
+                                                    body: AcceletometerScreen(),
+                                                  )));
                                     }
                                   },
                                   child: Text(
