@@ -3,7 +3,7 @@ import 'package:mod_master_2023/storage/secure_storge.dart';
 
 @immutable
 class Constants {
-  static const String baseUrl = "http://3.85.3.86:9001/api/";
+  static const String baseUrl = "http://3.95.66.199:9001/api/";
 
   static const String userRoute = "users/";
 
