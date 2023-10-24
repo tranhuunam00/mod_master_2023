@@ -147,7 +147,7 @@ class _AcceletometerScreenState extends State<AcceletometerScreen> {
                 String? phoneNumber = await SecureStorage().getPhoneNumber();
 
                 CreateAccelerometerModel acc = CreateAccelerometerModel(
-                    value: valueData, customer: phoneNumber ?? "2");
+                    value: valueData, customer: phoneNumber.toString() ?? "2");
                 try {
                   final res = await sensorRepository.createAccelerometer(acc);
 
