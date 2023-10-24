@@ -17,9 +17,14 @@ import 'dart:async';
 import 'package:mod_master_2023/services/sensor_service.dart';
 
 class AcceletometerScreen extends StatefulWidget {
-  const AcceletometerScreen({Key? key, required this.accelerometerCharactis})
+  const AcceletometerScreen(
+      {Key? key,
+      required this.accelerometerCharactis,
+      required this.numberDataSend})
       : super(key: key);
   final BluetoothCharacteristic accelerometerCharactis;
+  final int numberDataSend;
+
   @override
   State<AcceletometerScreen> createState() => _AcceletometerScreenState();
 }
@@ -53,7 +58,9 @@ class _AcceletometerScreenState extends State<AcceletometerScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _timer = new Timer.periodic(Duration(milliseconds: 80), (Timer timer) {
+    _timer = new Timer.periodic(
+        Duration(milliseconds: widget.numberDataSend < 100 ? 10 : 80),
+        (Timer timer) {
       widget.accelerometerCharactis.read();
       // setState(() {});
     });
@@ -129,11 +136,11 @@ class _AcceletometerScreenState extends State<AcceletometerScreen> {
               countPosition = 0;
             }
 
-            if (listAccX.length > 200 && !isCallApi) {
+            if (listAccX.length > widget.numberDataSend && !isCallApi) {
               isCallApi = true;
               Future.sync(() async {
                 String valueData = "";
-                for (int i = 0; i < 200; i++) {
+                for (int i = 0; i < widget.numberDataSend; i++) {
                   valueData += listAccX[i].value.toString();
                   valueData += "%";
                   valueData += listAccY[i].value.toString();
@@ -141,7 +148,7 @@ class _AcceletometerScreenState extends State<AcceletometerScreen> {
                   valueData += listAccZ[i].value.toString();
                   valueData += "@";
                   valueData += listAccX[i].time.toString();
-                  if (i != 199) valueData += "/";
+                  if (i != widget.numberDataSend - 1) valueData += "/";
                 }
 
                 String? phoneNumber = await SecureStorage().getPhoneNumber();
@@ -161,9 +168,9 @@ class _AcceletometerScreenState extends State<AcceletometerScreen> {
                     List<AccelerometerChartModel> newListAccY = listAccY;
                     List<AccelerometerChartModel> newListAccZ = listAccZ;
 
-                    newListAccX.removeRange(0, 200);
-                    newListAccY.removeRange(0, 200);
-                    newListAccZ.removeRange(0, 200);
+                    newListAccX.removeRange(0, widget.numberDataSend);
+                    newListAccY.removeRange(0, widget.numberDataSend);
+                    newListAccZ.removeRange(0, widget.numberDataSend);
 
                     listAccX = newListAccX;
                     listAccY = newListAccY;

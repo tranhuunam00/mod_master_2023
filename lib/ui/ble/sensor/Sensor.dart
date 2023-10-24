@@ -8,8 +8,11 @@ import 'package:mod_master_2023/configs/constants.dart';
 import 'package:mod_master_2023/ui/ble/sensor/accelerometer.dart';
 
 class SensorDashboard extends StatelessWidget {
-  const SensorDashboard({Key? key, required this.device}) : super(key: key);
+  const SensorDashboard(
+      {Key? key, required this.device, required this.numberDataSend})
+      : super(key: key);
   final BluetoothDevice device;
+  final int numberDataSend;
   @override
   Widget build(BuildContext context) {
     bool isService = false;
@@ -96,7 +99,9 @@ class SensorDashboard extends StatelessWidget {
                     // }
                     // isNotify = false;
                     return AcceletometerScreen(
-                        accelerometerCharactis: accelerometerCharactis!);
+                      accelerometerCharactis: accelerometerCharactis!,
+                      numberDataSend: this.numberDataSend,
+                    );
                   });
             }));
   }

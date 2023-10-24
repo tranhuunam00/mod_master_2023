@@ -129,6 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               builder: (context) {
                                 return SensorDashboard(
                                   device: selectedDevice!,
+                                  numberDataSend: 600,
                                 );
                               },
                             ),
@@ -138,7 +139,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         lable: Constants.ACCLEROMETER,
                       ),
                       CartSensor(
-                        onPress: () {},
+                        onPress: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return SensorDashboard(
+                                  device: selectedDevice!,
+                                  numberDataSend: 60,
+                                );
+                              },
+                            ),
+                          );
+                        },
                         img: AppImages.nhiet_do_Img,
                         lable: Constants.TEMPERATURE,
                       ),
