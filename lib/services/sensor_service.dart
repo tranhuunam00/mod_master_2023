@@ -7,7 +7,7 @@ import 'package:mod_master_2023/configs/constants.dart';
 import 'package:mod_master_2023/models/accelerometer.model.dart';
 
 class SensorService {
-  static const String sensorRoute = 'sensor';
+  static const String sensorRoute = 'sensors/create_accelerometer';
   Future<dynamic> createAccelerometer(CreateAccelerometerModel acc) async {
     var header = await Constants.requestHeadersToken();
     final response = await http.post(
