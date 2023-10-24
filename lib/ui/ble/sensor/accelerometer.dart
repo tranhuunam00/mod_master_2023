@@ -53,7 +53,7 @@ class _AcceletometerScreenState extends State<AcceletometerScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _timer = new Timer.periodic(Duration(milliseconds: 100), (Timer timer) {
+    _timer = new Timer.periodic(Duration(milliseconds: 80), (Timer timer) {
       widget.accelerometerCharactis.read();
       // setState(() {});
     });
@@ -200,8 +200,8 @@ class _AcceletometerScreenState extends State<AcceletometerScreen> {
                         // Initialize category axis
                         primaryXAxis: DateTimeAxis(
                             autoScrollingMode: AutoScrollingMode.end,
-                            visibleMinimum: listAccX.length > 120
-                                ? listAccX[listAccX.length - 120].time
+                            visibleMinimum: listAccX.length > 1000
+                                ? listAccX[listAccX.length - 1000].time
                                 : null,
                             // edgeLabelPlacement: EdgeLabelPlacement.shift,
                             majorGridLines: const MajorGridLines(width: 0),
@@ -218,8 +218,9 @@ class _AcceletometerScreenState extends State<AcceletometerScreen> {
                               },
                               // Bind data source
                               dataSource: listAccX,
-                              color: Colors.greenAccent,
+                              color: Color.fromARGB(255, 196, 131, 2),
                               name: "X",
+                              width: 4,
                               yValueMapper:
                                   (AccelerometerChartModel accValue, _) =>
                                       accValue.value,
@@ -231,10 +232,13 @@ class _AcceletometerScreenState extends State<AcceletometerScreen> {
                                   (ChartSeriesController controller) {
                                 _chartSeriesControllerY = controller;
                               },
-                              color: Colors.amber,
+                              color: Colors.black,
                               name: "Y",
+                              width: 4,
+
                               // Bind data source
                               dataSource: listAccY,
+                              dashArray: <double>[10, 100],
                               yValueMapper:
                                   (AccelerometerChartModel accValue, _) =>
                                       accValue.value,
@@ -249,6 +253,9 @@ class _AcceletometerScreenState extends State<AcceletometerScreen> {
                               // Bind data source
                               dataSource: listAccZ,
                               name: "Z",
+                              width: 4,
+                              dashArray: <double>[2, 6],
+                              color: Color.fromARGB(255, 192, 5, 5),
                               yValueMapper:
                                   (AccelerometerChartModel accValue, _) =>
                                       accValue.value,
