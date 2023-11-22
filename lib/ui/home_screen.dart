@@ -73,98 +73,95 @@ class _HomeScreenState extends State<HomeScreen> {
         Provider.of<BluetoothProvider>(context, listen: false);
 
     selectedDevice = bluetoothProvider.BleP.bluetoothDevice;
-    return Scaffold(
-      body: Container(
+    return Container(
         // nút bajaty blue tooth
         child: ListView(
-          children: <Widget>[
-            Container(
-              height: 200.h,
-              decoration: BoxDecoration(
-                  color: AppColors.jPrimaryColor,
-                  borderRadius:
-                      BorderRadius.only(bottomRight: Radius.circular(40.r))),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(50.0),
-              child: Container(
-                width: 50,
-                height: 50,
-                decoration:
-                    BoxDecoration(border: Border.all(color: Colors.blueAccent)),
-                child: TextButton(
-                    onPressed: () async {
-                      final BluetoothDevice? device =
-                          await Navigator.of(context).push(
+      children: <Widget>[
+        Container(
+          height: 200.h,
+          decoration: BoxDecoration(
+              color: AppColors.jPrimaryColor,
+              borderRadius:
+                  BorderRadius.only(bottomRight: Radius.circular(40.r))),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(50.0),
+          child: Container(
+            width: 50,
+            height: 50,
+            decoration:
+                BoxDecoration(border: Border.all(color: Colors.blueAccent)),
+            child: TextButton(
+                onPressed: () async {
+                  final BluetoothDevice? device =
+                      await Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return FindDevicesScreen();
+                      },
+                    ),
+                  );
+
+                  if (device != null) {
+                    BluetoothModel ble =
+                        BluetoothModel(bluetoothDevice: device);
+                    await bluetoothProvider.setBle(ble);
+                    setState(() {
+                      selectedDevice = device;
+                    });
+                    // _startChat(context, device!);
+                  } else {
+                    print('Discovery -> no device selected');
+                  }
+                },
+                child: Text("chọn bluetooth")),
+          ),
+        ),
+        selectedDevice != null
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CartSensor(
+                    onPress: () {
+                      Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) {
-                            return FindDevicesScreen();
+                            return SensorDashboard(
+                              device: selectedDevice!,
+                              numberDataSend: 600,
+                            );
                           },
                         ),
                       );
-
-                      if (device != null) {
-                        BluetoothModel ble =
-                            BluetoothModel(bluetoothDevice: device);
-                        await bluetoothProvider.setBle(ble);
-                        setState(() {
-                          selectedDevice = device;
-                        });
-                        // _startChat(context, device!);
-                      } else {
-                        print('Discovery -> no device selected');
-                      }
                     },
-                    child: Text("chọn bluetooth")),
-              ),
-            ),
-            selectedDevice != null
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      CartSensor(
-                        onPress: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return SensorDashboard(
-                                  device: selectedDevice!,
-                                  numberDataSend: 600,
-                                );
-                              },
-                            ),
-                          );
-                        },
-                        img: AppImages.accelerometer_Img,
-                        lable: Constants.ACCLEROMETER,
-                      ),
-                      CartSensor(
-                        onPress: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return SensorDashboard(
-                                  device: selectedDevice!,
-                                  numberDataSend: 60,
-                                );
-                              },
-                            ),
-                          );
-                        },
-                        img: AppImages.nhiet_do_Img,
-                        lable: Constants.TEMPERATURE,
-                      ),
-                      CartSensor(
-                        onPress: () {},
-                        img: AppImages.am_thanh_Img,
-                        lable: Constants.SOUND,
-                      ),
-                    ],
-                  )
-                : Container()
-          ],
-        ),
-      ),
-    );
+                    img: AppImages.accelerometer_Img,
+                    lable: Constants.ACCLEROMETER,
+                  ),
+                  CartSensor(
+                    onPress: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return SensorDashboard(
+                              device: selectedDevice!,
+                              numberDataSend: 60,
+                            );
+                          },
+                        ),
+                      );
+                    },
+                    img: AppImages.nhiet_do_Img,
+                    lable: Constants.TEMPERATURE,
+                  ),
+                  CartSensor(
+                    onPress: () {},
+                    img: AppImages.am_thanh_Img,
+                    lable: Constants.SOUND,
+                  ),
+                ],
+              )
+            : Container()
+      ],
+    ));
   }
 }

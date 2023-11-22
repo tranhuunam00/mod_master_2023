@@ -52,10 +52,6 @@ class _DashboardCustomerScreenState extends State<DashboardCustomerScreen> {
                 color: currentIndex == 0 ? AppColors.jPrimaryColor : null,
               ),
             ),
-            // const BottomNavigationBarItem(
-            //   label: 'Courses',
-            //   icon: Icon(Icons.bookmark),
-            // ),
             BottomNavigationBarItem(
               label: 'Tutors',
               icon: Icon(
@@ -63,13 +59,6 @@ class _DashboardCustomerScreenState extends State<DashboardCustomerScreen> {
                 color: currentIndex == 1 ? AppColors.jPrimaryColor : null,
               ),
             ),
-            // BottomNavigationBarItem(
-            //   label: 'Promotion',
-            //   icon: SvgPicture.asset(
-            //     AppImages.icPromotion,
-            //     color: currentIndex == 1 ? AppColors.jPrimaryColor : null,
-            //   ),
-            // ),
             BottomNavigationBarItem(
               label: 'Student',
               icon: Icon(
